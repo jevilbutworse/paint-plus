@@ -26,7 +26,6 @@ namespace paint_
             this.sizeScreen = this.Size;
             this.sizeRectangles = new Size(8, 8);
             instance = this;
-            btl1 = clear;
         }
 
         bool drw;
@@ -59,6 +58,16 @@ namespace paint_
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            if (funy == "ye")
+            {
+                pictureBox1.Image.Dispose();
+                funy = "no";
+            }
+            g.Clear(Color.White);
+        }
+
+        public void clear()
         {
             if (funy == "ye")
             {
@@ -101,16 +110,6 @@ namespace paint_
 
             // Return the screenshot
             return bmpScreenshot;
-        }
-
-        public void clearshow()
-        {
-            btl1.Visible = true;
-        }
-
-        public void clearhide()
-        {
-            btl1.Visible = false;
         }
 
         public void changeColour(string colourchoose)
@@ -182,7 +181,6 @@ namespace paint_
                 pictureBox1.Image.Dispose();
                 funy = "no";
             }
-            g.Clear(Color.White);
             funy = "ye";
             pictureBox1.Load("bnk.png");
         }

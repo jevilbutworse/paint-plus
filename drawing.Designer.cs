@@ -28,28 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.clear = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // clear
-            // 
-            this.clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.clear.Location = new System.Drawing.Point(621, 12);
-            this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(75, 23);
-            this.clear.TabIndex = 0;
-            this.clear.Text = "clear";
-            this.clear.UseVisualStyleBackColor = true;
-            this.clear.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(734, 394);
+            this.pictureBox1.Size = new System.Drawing.Size(1175, 671);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawing_MouseDown);
@@ -61,8 +49,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(734, 394);
-            this.Controls.Add(this.clear);
+            this.ClientSize = new System.Drawing.Size(1175, 671);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "drawing";
@@ -75,8 +62,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button clear;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

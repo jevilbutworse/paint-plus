@@ -37,14 +37,12 @@ namespace paint_
 
         private void saveToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            // hide the form inside (clearButton only)
-            insideForm.clearhide();
             // create new dialog
             var sfd = new SaveFileDialog();
             sfd.Filter = "Image(*.jpg)|*.jpg|(*.*)|*.*";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                // create new point and hide everything
+                // create new window point and hide everything
                 this.Location = new Point(-10, 0);
                 label1.Visible = false;
                 label2.Visible = false;
@@ -52,10 +50,10 @@ namespace paint_
                 menu.Visible = false;
                 this.FormBorderStyle = FormBorderStyle.None;
 
-                // Take screenshot.
+                // Take screenshot using function.
                 Bitmap bmpScreenshot = Screenshot();
                 this.BackgroundImage = bmpScreenshot;
-                // Save screen shot as file name
+                // Save screen shot as file name, and jpeg
                 bmpScreenshot.Save(sfd.FileName, ImageFormat.Jpeg);
 
                 // Turn all objects visible again
@@ -65,8 +63,6 @@ namespace paint_
                 menu.Visible = true;
                 this.FormBorderStyle = FormBorderStyle.Sizable;
             }
-            // Make the form (clearButton only) visible again.
-            insideForm.clearshow();
             // END.
         }
 
@@ -139,29 +135,29 @@ namespace paint_
         private void screen_FormClosing(object sender, FormClosingEventArgs e)
         {
 
-            insideForm.disposeIMG();
-            try
-            {
-                var dir = new DirectoryInfo("tempfiles/");
-                dir.Attributes = dir.Attributes & ~FileAttributes.ReadOnly;
-                dir.Delete(true);
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            
             // show dialog
             DialogResult dialogResult = MessageBox.Show("Save drawing before closing?", "Save Drawing", MessageBoxButtons.YesNo);
 
             if (dialogResult == DialogResult.No)
             {
+                insideForm.disposeIMG();
+                try
+                {
+                    var dir = new DirectoryInfo("tempfiles/");
+                    dir.Attributes = dir.Attributes & ~FileAttributes.ReadOnly;
+                    dir.Delete(true);
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 // end program (NO CODE NEEDED)
             }
 
             if (dialogResult == DialogResult.Yes)
             {
                 // show dialog to save, saves then exits
-                insideForm.clearhide();
                 var sfd = new SaveFileDialog();
                 sfd.Filter = "Paint+ File (*.panfile)|*.panfile";
                 if (sfd.ShowDialog() == DialogResult.OK)
@@ -186,14 +182,24 @@ namespace paint_
                     menu.Visible = true;
                     this.FormBorderStyle = FormBorderStyle.Sizable;
                 }
-                insideForm.clearshow();
+
+                insideForm.disposeIMG();
+                try
+                {
+                    var dir = new DirectoryInfo("tempfiles/");
+                    dir.Attributes = dir.Attributes & ~FileAttributes.ReadOnly;
+                    dir.Delete(true);
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // show dialog to save, saves then exits
-            insideForm.clearhide();
             var sfd = new SaveFileDialog();
             sfd.Filter = "PNG File (*.png)|*.png|Paint+ File (*.panfile)|*.panfile|(*.*)|*.*";
             if (sfd.ShowDialog() == DialogResult.OK)
@@ -218,7 +224,6 @@ namespace paint_
                 menu.Visible = true;
                 this.FormBorderStyle = FormBorderStyle.Sizable;
             }
-            insideForm.clearshow();
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -230,6 +235,17 @@ namespace paint_
 
                 insideForm.loadpanfile(new Bitmap(timetime.FileName));
             }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var about = new About();
+            about.ShowDialog();
+        }
+
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            insideForm.clear();
         }
     }
 }
